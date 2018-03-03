@@ -1,7 +1,10 @@
 {
     "cSpell.words": [
+        "Injectable",
         "appender",
         "appenders",
-        "jsnlog"
+        "jsnlog",
+        "onunhandledrejection",
+        "unhandledrejection"
     ]
 }
