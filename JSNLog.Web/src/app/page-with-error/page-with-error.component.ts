@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-with-error.component.css']
 })
 export class PageWithErrorComponent implements OnInit {
+  public imaginary: any = null;
 
   constructor() { }
 
