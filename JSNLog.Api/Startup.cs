@@ -30,6 +30,7 @@ namespace JSNLog.Api
             }
 
             app.UseMvc();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             // Configure JSNLog
             // See http://jsnlog.com/Documentation/Configuration/JSNLog
