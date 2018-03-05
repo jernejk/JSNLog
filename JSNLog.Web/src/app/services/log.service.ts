@@ -104,7 +104,7 @@ export class LogService {
         if (this.isLogEnabled) {
             this.logger().error({
                 message: message,
-                exception: this.safeStringify(exception)
+                exception: this.getExceptionData(exception)
             });
         }
     }
@@ -113,7 +113,7 @@ export class LogService {
         console.error(message, exception);
 
         if (this.isLogEnabled) {
-            this.logger().fatalException(message, this.safeStringify(exception));
+            this.logger().fatalException(message, this.getExceptionData(exception));
         }
     }
 
@@ -121,12 +121,26 @@ export class LogService {
     // The ErrorHandler should rethrow the exception which will display the error in the console.
     public logUnhandledException(message: string | any, exception: any = null) {
         if (this.isLogEnabled) {
-            this.logger().fatalException(message, this.safeStringify(exception));
+            this.logger().fatalException(message, this.getExceptionData(exception));
         }
     }
 
+    // This method will serialize the exception and decide whatever full details should be sent or not.
+    // Some of the exceptions will be massive and not particularly useful.
+    public getExceptionData(error: any) {
+        let json = this.safeStringify(error);
+        if (json.length > 6000) {
+            json = JSON.stringify({
+                message: error.message,
+                stack: error.stack
+            });
+        }
+
+        return json;
+    }
+
     // Some of the exceptions reported by Angular have circular references and cannot be serialized by JSON.stringify().
-    private safeStringify(obj: any) {
+    public safeStringify(obj: any) {
         let cache = [];
         const result = JSON.stringify(obj, (key, value) => {
             if (typeof value === 'object' && value !== null) {
