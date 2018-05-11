@@ -12,13 +12,13 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private router: Router, @Inject('JSNLOG') private logger: JL.JSNLog) { }
+  constructor(private router: Router/*, @Inject('JSNLOG') private logger: JL.JSNLog*/) { }
 
   ngOnInit() {
   }
 
   public login() {
-    this.logger().info(`User ${this.email} is logged in`);
+    // this.logger().info(`User ${this.email} is logged in`);
     this.router.navigate(['/']);
   }
 

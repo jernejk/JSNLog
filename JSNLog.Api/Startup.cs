@@ -30,17 +30,18 @@ namespace JSNLog.Api
             }
 
             app.UseMvc();
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            // Configure JSNLog
-            // See http://jsnlog.com/Documentation/Configuration/JSNLog
-            var jsnlogConfiguration = new JsnlogConfiguration()
-            {
-                // Format "%message" will break logging.
-                serverSideMessageFormat = "JL: %message",
-            };
+            //app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            app.UseJSNLog(new LoggingAdapter(loggerFactory), jsnlogConfiguration);
+            //// Configure JSNLog
+            //// See http://jsnlog.com/Documentation/Configuration/JSNLog
+            //var jsnlogConfiguration = new JsnlogConfiguration()
+            //{
+            //    // Format "%message" will break logging.
+            //    serverSideMessageFormat = "JL: %message",
+            //};
+
+            //app.UseJSNLog(new LoggingAdapter(loggerFactory), jsnlogConfiguration);
         }
     }
 }
