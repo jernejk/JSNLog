@@ -2,12 +2,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PageWithErrorComponent } from './page-with-error/page-with-error.component';
+import { JL } from 'jsnlog';
+import { LogService } from './services/log.service';
+import { UncaughtExceptionHandler } from './services/uncaught-exception-handler';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,7 +31,11 @@ const appRoutes: Routes = [
     CommonModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    { provide: 'JSNLOG', useValue: JL },
+    { provide: ErrorHandler, useClass: UncaughtExceptionHandler },
+    LogService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
